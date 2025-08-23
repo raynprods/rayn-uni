@@ -102,7 +102,7 @@ export default function Page() {
               className="absolute bottom-4 left-4 text-sm uppercase tracking-widest"
               style={{ color: BRAND.mute }}
             >
-              Showreel / Still Frame
+              
             </div>
           </div>
         </MotionDiv>
@@ -119,8 +119,7 @@ export default function Page() {
         >
           <h2 className="text-3xl md:text-4xl font-bold">Portfolio</h2>
           <p className="mt-2 text-white/60">
-            Sélection d’images — la grille s’adapte automatiquement au format
-            des photos.
+            
           </p>
         </MotionDiv>
 
@@ -159,8 +158,7 @@ export default function Page() {
         >
           <h2 className="text-3xl md:text-4xl font-bold">Prestations</h2>
           <p className="mt-3 text-white/70 max-w-2xl">
-            De la préparation au rendu final, j&apos;accompagne chaque projet
-            avec une attention au détail et une esthétique assumée.
+            Du premier brief jusqu’au rendu final, je prends soin de ton projet avec un vrai sens du détail et un style qui me ressemble
           </p>
         </MotionDiv>
 
@@ -217,8 +215,7 @@ export default function Page() {
           <div>
             <h2 className="text-3xl md:text-4xl font-bold">À propos</h2>
             <p className="mt-3 text-white/70">
-              Je conçois des images soignées avec une direction artistique
-              claire, pour des marques, artistes et particuliers.
+              Je conçois des visuels travaillés, avec une direction artistique nette, adaptés aussi bien aux marques qu’aux artistes et particuliers.
             </p>
             <ul className="mt-6 space-y-2 text-white/80 text-sm">
               <li>📍 Bordeaux • Alsace • France</li>
@@ -247,7 +244,7 @@ export default function Page() {
               et tes dates souhaitées. Je reviens vers toi rapidement.
             </p>
             <ul className="mt-6 space-y-2 text-white/80 text-sm">
-              <li>✉️ khennaoui@gmail.com</li>
+              <li>✉️ khennaouir@gmail.com</li>
               <li>📞 +33 6 15 77 98 43</li>
               <li>
                 🔗{" "}
