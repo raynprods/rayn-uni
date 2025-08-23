@@ -96,7 +96,7 @@ export default function Page() {
               className="absolute bottom-4 left-4 text-sm uppercase tracking-widest"
               style={{ color: BRAND.mute }}
             >
-              Showreel / Still Frame
+              
             </div>
           </div>
         </motion.div>
@@ -205,7 +205,7 @@ export default function Page() {
             </p>
             <ul className="mt-6 space-y-2 text-white/80 text-sm">
               <li>📍 Bordeaux • Alsace • France</li>
-              <li>✉️ khennaoui@gmail.com</li>
+              <li>✉️ khennaouir@gmail.com</li>
               <li>📞 +33 6 15 77 98 43</li>
               <li>
                 🔗{" "}
@@ -233,7 +233,7 @@ export default function Page() {
           {/* Formulaire */}
           <form
             className="rounded-2xl border border-white/10 p-6 space-y-4 bg-black/30"
-            action="https://formspree.io/f/xxxxxx" // remplace par ton endpoint Formspree
+            action="https://formspree.io/f/mjkonqdd" // remplace par ton endpoint Formspree
             method="POST"
           >
             <input
