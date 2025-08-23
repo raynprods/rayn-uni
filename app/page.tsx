@@ -280,34 +280,37 @@ export default function Page() {
             className="rounded-2xl border border-white/10 p-6 space-y-4 bg-black/30"
           >
             <form
-              action="mailto:contact@rayn.uni"
-              method="post"
-              encType="text/plain"
-              className="space-y-4"
-            >
-              <input
-                className="w-full rounded-xl bg-black/40 border border-white/10 px-4 py-3"
-                placeholder="Nom"
-                required
-              />
-              <input
-                type="email"
-                className="w-full rounded-xl bg-black/40 border border-white/10 px-4 py-3"
-                placeholder="Email"
-                required
-              />
-              <textarea
-                rows={5}
-                className="w-full rounded-xl bg-black/40 border border-white/10 px-4 py-3"
-                placeholder="Message..."
-                required
-              />
-              <button
-                type="submit"
-                className="w-full rounded-xl px-5 py-3 font-semibold"
-                style={{ background: BRAND.accent }}
-              >
-                Envoyer
+               action="https://formspree.io/f/mjkonqdd" // ⚡ remplace TON-ID-FORM par ton lien Formspree
+  method="POST"
+  className="rounded-2xl border border-white/10 p-6 space-y-4 bg-black/30"
+>
+  <input
+    type="text"
+    name="name"
+    placeholder="Nom"
+    required
+    className="w-full rounded-xl bg-black/40 border border-white/10 px-4 py-3"
+  />
+  <input
+    type="email"
+    name="email"
+    placeholder="Email"
+    required
+    className="w-full rounded-xl bg-black/40 border border-white/10 px-4 py-3"
+  />
+  <textarea
+    name="message"
+    rows={5}
+    placeholder="Message..."
+    required
+    className="w-full rounded-xl bg-black/40 border border-white/10 px-4 py-3"
+  />
+  <button
+    type="submit"
+    className="w-full rounded-xl px-5 py-3 font-semibold"
+    style={{ background: BRAND.accent }}
+  >
+    Envoyer
               </button>
             </form>
           </MotionDiv>
