@@ -1,12 +1,8 @@
 "use client";
 
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import { motion } from "framer-motion";
 
-// ✅ Wrapper propre pour Framer Motion (évite les erreurs de typage)
-const MotionDiv = motion.div;
-
-// 🎨 Thème
 const BRAND = {
   bg: "#000000",
   text: "#F5F5F5",
@@ -14,7 +10,6 @@ const BRAND = {
   accent: "#B22222",
 };
 
-// 🧭 Nav
 const nav = [
   { id: "home", label: "Accueil" },
   { id: "portfolio", label: "Portfolio" },
@@ -25,6 +20,7 @@ const nav = [
 
 export default function Page() {
   const year = useMemo(() => new Date().getFullYear(), []);
+  const [activeVideo, setActiveVideo] = useState<string | null>(null);
 
   return (
     <div
@@ -57,10 +53,9 @@ export default function Page() {
 
       {/* Hero */}
       <section id="home" className="mx-auto max-w-7xl px-4 py-24 md:py-36">
-        <MotionDiv
+        <motion.div
           initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           className="grid md:grid-cols-2 gap-10 items-center"
         >
@@ -70,8 +65,8 @@ export default function Page() {
             </h1>
             <p className="mt-4 text-lg text-white/80 max-w-xl">
               Alsacien installé à Bordeaux, je crée des images et des films qui
-              racontent une histoire — avec une esthétique minimaliste et
-              cinématographique.
+              racontent une histoire — avec une esthétique simple, ciné et sans
+              chichi.
             </p>
             <div className="mt-8 flex gap-3">
               <a
@@ -90,7 +85,6 @@ export default function Page() {
               </a>
             </div>
           </div>
-
           <div className="relative aspect-video rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
             <img
               src="/Photos/logo.png"
@@ -102,44 +96,61 @@ export default function Page() {
               className="absolute bottom-4 left-4 text-sm uppercase tracking-widest"
               style={{ color: BRAND.mute }}
             >
-              
+              Showreel / Still Frame
             </div>
           </div>
-        </MotionDiv>
+        </motion.div>
       </section>
 
-      {/* Portfolio (masonry simple via CSS columns) */}
-      <section id="portfolio" className="mx-auto max-w-7xl px-4 py-16 md:py-24">
-        <MotionDiv
-          initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.5 }}
-          className="mb-10"
-        >
-          <h2 className="text-3xl md:text-4xl font-bold">Portfolio</h2>
-          <p className="mt-2 text-white/60">
-            
-          </p>
-        </MotionDiv>
+      {/* Portfolio */}
+      <section
+        id="portfolio"
+        className="mx-auto max-w-7xl px-4 py-16 md:py-24"
+      >
+        <h2 className="text-3xl md:text-4xl font-bold">Portfolio</h2>
 
-        <div className="columns-1 md:columns-2 lg:columns-3 gap-4 [column-fill:_balance]">
-          {["1", "2", "3", "4", "5", "6"].map((n, i) => (
-            <MotionDiv
-              key={n}
-              initial={{ opacity: 0, scale: 0.98 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.35, delay: i * 0.04 }}
-              className="break-inside-avoid mb-4 overflow-hidden rounded-lg border border-white/10"
+        {/* Grille photos */}
+        <div className="mt-10 columns-1 md:columns-2 lg:columns-3 gap-4 space-y-4">
+          <img src="/Photos/1.jpg" alt="Photo 1" className="rounded-lg w-full" />
+          <img src="/Photos/2.jpg" alt="Photo 2" className="rounded-lg w-full" />
+          <img src="/Photos/3.jpg" alt="Photo 3" className="rounded-lg w-full" />
+          <img src="/Photos/4.jpg" alt="Photo 4" className="rounded-lg w-full" />
+          <img src="/Photos/5.jpg" alt="Photo 5" className="rounded-lg w-full" />
+          <img src="/Photos/6.jpg" alt="Photo 6" className="rounded-lg w-full" />
+        </div>
+
+        {/* Vidéos */}
+        <h3 className="mt-16 mb-6 text-2xl font-semibold">Vidéos</h3>
+        <div className="grid md:grid-cols-2 gap-6">
+          {[
+            {
+              title: "Echo",
+              url: "https://www.youtube.com/embed/OlpkS8PBn4g",
+              thumb: "https://img.youtube.com/vi/OlpkS8PBn4g/hqdefault.jpg",
+            },
+            {
+              title: "Tous Jours",
+              url: "https://www.youtube.com/embed/SV-q4rb_T5s",
+              thumb: "https://img.youtube.com/vi/SV-q4rb_T5s/hqdefault.jpg",
+            },
+          ].map((video, i) => (
+            <div
+              key={i}
+              onClick={() => setActiveVideo(video.url)}
+              className="cursor-pointer block group rounded-2xl overflow-hidden border border-white/10 hover:border-white/30 transition"
             >
-              <img
-                src={`/Photos/${n}.jpg`}
-                alt={`Photo ${n}`}
-                className="w-full h-auto object-cover"
-                loading="lazy"
-              />
-            </MotionDiv>
+              <div className="aspect-video w-full overflow-hidden">
+                <img
+                  src={video.thumb}
+                  alt={video.title}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                />
+              </div>
+              <div className="px-4 py-3 text-sm flex items-center justify-between">
+                <span className="opacity-80">{video.title}</span>
+                <span className="inline-block h-2 w-2 rounded-full bg-red-600" />
+              </div>
+            </div>
           ))}
         </div>
       </section>
@@ -149,81 +160,34 @@ export default function Page() {
         id="services"
         className="mx-auto max-w-7xl px-4 py-16 md:py-24 border-t border-white/10"
       >
-        <MotionDiv
-          initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.5 }}
-          className="mb-10"
-        >
-          <h2 className="text-3xl md:text-4xl font-bold">Prestations</h2>
-          <p className="mt-3 text-white/70 max-w-2xl">
-            Du premier brief jusqu’au rendu final, je prends soin de ton projet avec un vrai sens du détail et un style qui me ressemble
-          </p>
-        </MotionDiv>
-
-        <div className="grid md:grid-cols-3 gap-6">
-          {[
-            {
-              t: "Photographie",
-              d: "Portrait, mode, corporate, événements, campagnes.",
-            },
-            {
-              t: "Réalisation",
-              d: "Clips, films institutionnels, aftermovies, documentaire.",
-            },
-            {
-              t: "Post-production",
-              d: "Montage, étalonnage, sound design, livraison optimisée.",
-            },
-          ].map((s, i) => (
-            <MotionDiv
-              key={s.t}
-              initial={{ opacity: 0, y: 8 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.45, delay: i * 0.05 }}
-              className="rounded-2xl border border-white/10 p-6 bg-black/20"
-            >
-              <h3 className="text-xl font-semibold">{s.t}</h3>
-              <p className="mt-2 text-white/70 text-sm">{s.d}</p>
-            </MotionDiv>
-          ))}
-        </div>
-      </section>
-
-      {/* À propos (optionnel) */}
-      <section
-        id="about"
-        className="mx-auto max-w-7xl px-4 py-16 md:py-24 border-t border-white/10"
-      >
-        <MotionDiv
-          initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.5 }}
-          className="grid md:grid-cols-2 gap-10 items-center"
-        >
-          <div className="relative overflow-hidden rounded-2xl border border-white/10">
-            <img
-              src="/Photos/moi.jpg"
-              alt="Portrait"
-              className="w-full h-auto object-cover"
-              loading="lazy"
-            />
-          </div>
-          <div>
-            <h2 className="text-3xl md:text-4xl font-bold">À propos</h2>
-            <p className="mt-3 text-white/70">
-              Je conçois des visuels travaillés, avec une direction artistique nette, adaptés aussi bien aux marques qu’aux artistes et particuliers.
+        <h2 className="text-3xl md:text-4xl font-bold">Prestations</h2>
+        <p className="mt-3 text-white/70 max-w-2xl">
+          De la préparation au rendu final, chaque projet est construit avec
+          soin, une bonne dose de créativité et une esthétique assumée.
+        </p>
+        <div className="mt-10 grid md:grid-cols-3 gap-6">
+          <div className="rounded-2xl border border-white/10 p-6">
+            <h3 className="text-xl font-semibold">Photographie</h3>
+            <p className="mt-2 text-white/70 text-sm">
+              Portraits, mode, événements ou campagnes… je capture des images
+              qui marquent les esprits.
             </p>
-            <ul className="mt-6 space-y-2 text-white/80 text-sm">
-              <li>📍 Bordeaux • Alsace • France</li>
-              <li>🌙 Esthétique ciné, lumière naturelle et teintures sobres</li>
-              <li>⚙️ Adobe Premiere Pro • DaVinci Resolve • Lightroom</li>
-            </ul>
           </div>
-        </MotionDiv>
+          <div className="rounded-2xl border border-white/10 p-6">
+            <h3 className="text-xl font-semibold">Réalisation</h3>
+            <p className="mt-2 text-white/70 text-sm">
+              Clips, films institutionnels, aftermovies ou documentaires : je
+              raconte ton histoire en vidéo avec rythme et authenticité.
+            </p>
+          </div>
+          <div className="rounded-2xl border border-white/10 p-6">
+            <h3 className="text-xl font-semibold">Post-production</h3>
+            <p className="mt-2 text-white/70 text-sm">
+              Montage, étalonnage, sound design… je peaufine chaque détail pour
+              un rendu final propre et impactant.
+            </p>
+          </div>
+        </div>
       </section>
 
       {/* Contact */}
@@ -232,19 +196,16 @@ export default function Page() {
         className="mx-auto max-w-7xl px-4 py-16 md:py-24 border-t border-white/10"
       >
         <div className="grid md:grid-cols-2 gap-10">
-          <MotionDiv
-            initial={{ opacity: 0, y: 12 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.45 }}
-          >
+          {/* Infos */}
+          <div>
             <h2 className="text-3xl md:text-4xl font-bold">Contact</h2>
             <p className="mt-3 text-white/70 max-w-lg">
-              Dis-moi en quelques mots ton besoin (shooting, clip, film, autre)
-              et tes dates souhaitées. Je reviens vers toi rapidement.
+              Besoin d’un shooting, d’un clip ou d’un film ? Dis-moi ce que tu
+              as en tête et on construit ça ensemble.
             </p>
             <ul className="mt-6 space-y-2 text-white/80 text-sm">
-              <li>✉️ khennaouir@gmail.com</li>
+              <li>📍 Bordeaux • Alsace • France</li>
+              <li>✉️ khennaoui@gmail.com</li>
               <li>📞 +33 6 15 77 98 43</li>
               <li>
                 🔗{" "}
@@ -267,50 +228,42 @@ export default function Page() {
                 </a>
               </li>
             </ul>
-          </MotionDiv>
+          </div>
 
-          <MotionDiv
-            initial={{ opacity: 0, y: 12 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.45, delay: 0.08 }}
+          {/* Formulaire */}
+          <form
             className="rounded-2xl border border-white/10 p-6 space-y-4 bg-black/30"
+            action="https://formspree.io/f/xxxxxx" // remplace par ton endpoint Formspree
+            method="POST"
           >
-            <form
-               action="https://formspree.io/f/mjkonqdd" // ⚡ remplace TON-ID-FORM par ton lien Formspree
-  method="POST"
-  className="rounded-2xl border border-white/10 p-6 space-y-4 bg-black/30"
->
-  <input
-    type="text"
-    name="name"
-    placeholder="Nom"
-    required
-    className="w-full rounded-xl bg-black/40 border border-white/10 px-4 py-3"
-  />
-  <input
-    type="email"
-    name="email"
-    placeholder="Email"
-    required
-    className="w-full rounded-xl bg-black/40 border border-white/10 px-4 py-3"
-  />
-  <textarea
-    name="message"
-    rows={5}
-    placeholder="Message..."
-    required
-    className="w-full rounded-xl bg-black/40 border border-white/10 px-4 py-3"
-  />
-  <button
-    type="submit"
-    className="w-full rounded-xl px-5 py-3 font-semibold"
-    style={{ background: BRAND.accent }}
-  >
-    Envoyer
-              </button>
-            </form>
-          </MotionDiv>
+            <input
+              className="w-full rounded-xl bg-black/40 border border-white/10 px-4 py-3"
+              placeholder="Nom"
+              name="name"
+              required
+            />
+            <input
+              type="email"
+              className="w-full rounded-xl bg-black/40 border border-white/10 px-4 py-3"
+              placeholder="Email"
+              name="email"
+              required
+            />
+            <textarea
+              rows={5}
+              className="w-full rounded-xl bg-black/40 border border-white/10 px-4 py-3"
+              placeholder="Message..."
+              name="message"
+              required
+            />
+            <button
+              type="submit"
+              className="w-full rounded-xl px-5 py-3 font-semibold"
+              style={{ background: BRAND.accent }}
+            >
+              Envoyer
+            </button>
+          </form>
         </div>
       </section>
 
@@ -320,6 +273,26 @@ export default function Page() {
           <span>© {year} RAYN.UNI — Tous droits réservés</span>
         </div>
       </footer>
+
+      {/* Lightbox Vidéo */}
+      {activeVideo && (
+        <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50">
+          <div className="relative w-full max-w-3xl aspect-video">
+            <iframe
+              src={`${activeVideo}?autoplay=1`}
+              title="Video player"
+              className="w-full h-full rounded-lg"
+              allow="autoplay; fullscreen"
+            />
+            <button
+              onClick={() => setActiveVideo(null)}
+              className="absolute -top-10 right-0 text-white text-2xl font-bold"
+            >
+              ✕
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
