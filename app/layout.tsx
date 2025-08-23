@@ -1,25 +1,53 @@
-export const metadata = {
-  title: "RAYN.UNI — Portfolio",
-  description: "Portfolio de photographie & réalisation — RAYN.UNI",
+import "./globals.css";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Rayn Uni — Photographe & Réalisateur à Bordeaux",
+  description:
+    "Photographe et réalisateur basé à Bordeaux. Je crée des images et des films avec une esthétique cinématographique et authentique. Disponible partout en France.",
+  keywords: [
+    "photographe Bordeaux",
+    "réalisateur Bordeaux",
+    "photographie Alsace",
+    "vidéaste Bordeaux",
+    "photographe mode",
+    "film institutionnel",
+    "shooting Bordeaux",
+  ],
+  openGraph: {
+    title: "Rayn Uni — Photographe & Réalisateur à Bordeaux",
+    description:
+      "Portfolio de Rayn Uni, photographe et réalisateur basé à Bordeaux. Découvrez mes photos, vidéos et prestations.",
+    url: "https://raynuni.com",
+    siteName: "Rayn Uni",
+    images: [
+      {
+        url: "/Photos/logo.png", // tu peux mettre une photo ou un logo
+        width: 1200,
+        height: 630,
+        alt: "Rayn Uni Logo",
+      },
+    ],
+    locale: "fr_FR",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Rayn Uni — Photographe & Réalisateur à Bordeaux",
+    description:
+      "Photographe et réalisateur basé à Bordeaux, je crée des images et vidéos avec une esthétique simple et ciné.",
+    images: ["/Photos/logo.png"],
+  },
 };
 
-import "./globals.css";
-
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="fr">
       <body>{children}</body>
     </html>
   );
 }
-
-<head>
-  <title>Raynuni | Photographe & Réalisateur à Bordeaux</title>
-  <meta name="description" content="Portfolio de Raynuni, photographe et réalisateur basé à Bordeaux. Spécialisé en portrait, mode, clips et films institutionnels." />
-  <meta name="keywords" content="photographe Bordeaux, réalisateur Bordeaux, photographe Alsace, clip vidéo Bordeaux" />
-  <meta property="og:title" content="Raynuni | Photographe & Réalisateur" />
-  <meta property="og:description" content="Découvrez mon univers photo et vidéo à Bordeaux et en Alsace." />
-  <meta property="og:image" content="/Photos/logo.png" />
-  <meta property="og:url" content="https://raynuni.com" />
-  <meta name="twitter:card" content="summary_large_image" />
-</head>
