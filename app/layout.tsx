@@ -7,19 +7,15 @@ export const metadata: Metadata = {
   description:
     "Portfolio de RAYN.UNI — Photographe & Réalisateur basé à Bordeaux. Projets photo et vidéo pour marques, artistes et particuliers.",
   metadataBase: new URL("https://raynuni.com"),
-  alternates: { canonical: "/" },
+  alternates: { canonical: "https://raynuni.com" },
 
   // Favicons / icônes
   icons: {
-    icon: [
-      { url: "/logo.png", type: "image/png" }, // favicon
-    ],
-    apple: [
-      { url: "/logo.png", type: "image/png" }, // icône iOS (si tu veux une version 180x180, renomme-la et ajoute-la ici)
-    ],
+    icon: [{ url: "/logo.png", type: "image/png" }],
+    apple: [{ url: "/logo.png", type: "image/png" }],
   },
 
-  // Open Graph (aperçus Facebook/LinkedIn + parfois Google)
+  // Open Graph (Facebook / LinkedIn / Google)
   openGraph: {
     title: "RAYN.UNI — Photographe & Réalisateur",
     description:
@@ -55,7 +51,7 @@ export const metadata: Metadata = {
     googleBot: {
       index: true,
       follow: true,
-      maxSnippet: -1,
+      "max-snippet": -1,
       "max-image-preview": "large",
       "max-video-preview": -1,
     },
@@ -67,7 +63,7 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  // JSON-LD (aide Google à associer ton logo à ta "marque")
+  // JSON-LD (données structurées pour Google)
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Organization",
@@ -75,7 +71,7 @@ export default function RootLayout({
     url: "https://raynuni.com",
     logo: "https://raynuni.com/logo.png",
     sameAs: [
-      "https://www.instagram.com/rayn.uni/",
+      "https://www.instagram.com/rayn_prods/",
       "https://www.linkedin.com/in/rayyan-khennaoui-a85623205/",
     ],
   };
@@ -85,7 +81,6 @@ export default function RootLayout({
       <head>
         <script
           type="application/ld+json"
-          // On stringify ici pour éviter les erreurs d’objets dans l’attribut
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
