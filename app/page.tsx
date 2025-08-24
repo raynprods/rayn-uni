@@ -210,7 +210,7 @@ export default function Page() {
               <li>
                 🔗{" "}
                 <a
-                  href="https://www.instagram.com/rayn_prods/"
+                  href="https://www.instagram.com/rayn.uni/"
                   target="_blank"
                   rel="noreferrer"
                   className="hover:underline"
